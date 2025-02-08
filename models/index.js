@@ -8,13 +8,18 @@ const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
+const dbUrl = new URL('mysql://root:FlufkIbwBIjVuInkmIAebzjutvwpZgWw@viaduct.proxy.rlwy.net:38787/railway');
 
 let sequelize;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+   sequelize = new Sequelize(dbUrl.pathname.substring(1), dbUrl.username, dbUrl.password, {
+    host: dbUrl.hostname,
+    port: dbUrl.port,
+    dialect: "mysql",
+    logging: false, // Set to `console.log` if you want query logs
+  });}
 
 fs
   .readdirSync(__dirname)
