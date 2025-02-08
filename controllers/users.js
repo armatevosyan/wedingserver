@@ -7,10 +7,12 @@ const addGuests = async (req, res) => {
 
         await Guests.create(body);
         const data = await Guests.findAll({order:[['createdAt', 'DESC']]});
-
+        const guestsCount = data.reduce((acc, item)=> {
+            acc += +item.count;
+            return acc;
+        },0)
         const tableRows = data.map(row => `
       <tr>
-        <td>${row.id}</td>
         <td>${row.name}</td>
         <td>${row.count}</td>
       </tr>
@@ -56,14 +58,13 @@ const addGuests = async (req, res) => {
         </head>
         <body>
           <div class="container">
-            <h2>Data from MySQL Table</h2>
+            <h2>Հյուրերի տվյալներ, ընդհանուր քանակը - ${guestsCount}</h2>
+            <h2>Նոր հյուրը - ${body.name}, ${new Date()}</h2>
             <table>
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Name</th>
-                  <th>Email</th>
-                  <th>Created At</th>
+                  <th>Անուն Ազգանուն</th>
+                  <th>Հյուրերի քանակ</th>
                 </tr>
               </thead>
               <tbody>
@@ -84,7 +85,7 @@ const addGuests = async (req, res) => {
             secure: false,
             auth: {
                 user: 'notifydentist@gmail.com',
-                pass: 'rolx wfhh kxqj oqhx',
+                pass: 'povi rwxd zlsy mgpu',
             },
             service: 'Gmail',
             ignoreTLS: true,
