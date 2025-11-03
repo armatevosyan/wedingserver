@@ -84,8 +84,8 @@ const addGuests = async (req, res) => {
             port: 465,
             secure: false,
             auth: {
-                user: 'notifydentist@gmail.com',
-                pass: 'povi rwxd zlsy mgpu',
+                user: 'matevosyan.2011@gmail.com',
+                pass: 'urdx suuc ixes dbt',
             },
             service: 'Gmail',
             ignoreTLS: true,
@@ -95,7 +95,7 @@ const addGuests = async (req, res) => {
 
         const mailOptions = {
             from: '"Wedding" <notifydentist@gmail.com>',
-            to: ['matevosyan.2011@gmail.com', 'lilit-davtyan-99-99@mail.ru'],
+            to: ['matevosyan.2011@gmail.com'],
             subject: 'Նոր Հյուրերի գրանցում',
             html: htmlTemplate,
         };
